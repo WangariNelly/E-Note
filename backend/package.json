@@ -1,0 +1,19 @@
+{
+  "name": "e-note",
+  "version": "1.0.0",
+  "description": "An online note taking application.",
+  "main": "server.ts",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WangariNelly/E-Note.git"
+  },
+  "author": "Nelly Wangari",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/WangariNelly/E-Note/issues"
+  },
+  "homepage": "https://github.com/WangariNelly/E-Note#readme"
+}
