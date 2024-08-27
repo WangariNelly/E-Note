@@ -5,6 +5,8 @@
   "main": "server.ts",
   "scripts": {
     "dev": "nodemon --legacy-watch server.ts",
+    "format": "prettier --write \"**/*.ts\"",
+    "format-check": "prettier --check \"**/*.ts\"",
     "test": "jest"
   },
   "repository": {
