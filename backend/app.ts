@@ -1,4 +1,5 @@
 import express, { Express } from 'express';
+import { getApiHealth } from './controllers/health.controller';
 
 const app: Express = express();
 
@@ -9,6 +10,9 @@ const app: Express = express();
 app.use(express.json);
 app.use(express.urlencoded({ extended: false }));
 
-const baseUrl: string = 'api/v1';
+// const baseUrl: string = '/api/v1';
+
+//mounting routes
+app.use('/health', getApiHealth);
 
 export { app };
