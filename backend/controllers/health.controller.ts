@@ -10,8 +10,10 @@ export const getApiHealth = CatchAsyncErrorsHelper(
 	next: NextFunction ) => {
 	// console.log("connected to controller")
 	if (!req.errored) {
-		return next(new ErrorHandler('Health API down', 503));
-	}
+		const customError = next(new ErrorHandler('Health API down', 503));
+		console.log(customError);
+		return customError;
+	}  
 		return res.status(200).json({
 			success: true,
 			message: 'Api health ok!',

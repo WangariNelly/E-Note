@@ -10,7 +10,7 @@ const errorMiddleware = (
 ) => {
 	err.statusCode = err.statusCode || 500;
 	if (process.env.NODE_ENV?.includes('development')) {
-		console.log('This message will only be logged in development mode.');
+		// console.log('This message will only be logged in development mode.');
 		res.status(err.statusCode).json({
 			success: false,
 			error: err,
@@ -20,7 +20,7 @@ const errorMiddleware = (
 	}
 
 	if (process.env.NODE_ENV?.includes('production')) {
-		console.log('This message will only be logged in production mode.');
+		// console.log('This message will only be logged in production mode.');
 		let error: IError = { ...err };
 
 		error.message = err.message;
