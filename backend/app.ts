@@ -1,18 +1,22 @@
 import express, { Express } from 'express';
-import { getApiHealth } from './controllers/health.controller';
+import router from './routes/health.route';
+import errorMiddleware from './middlewares/error.middleware';
 
 const app: Express = express();
 
 /**
- * mount middlewares
- * enable json body parser and url encoded routes
+ * Mount middlewares
+ * Enable json body payloads and URL encoded routes
  */
-app.use(express.json);
+app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// const baseUrl: string = '/api/v1';
+const baseUrl: string = '/api/v1';
 
-//mounting routes
-app.use('/health', getApiHealth);
+// start mount routes
+app.use(baseUrl + '/health', router);
+//end mount routes
+
+app.use(errorMiddleware);
 
 export { app };
