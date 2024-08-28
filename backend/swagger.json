@@ -1,0 +1,72 @@
+{
+	"openapi": "3.0.3",
+	"info": {
+		"title": "E-Note API",
+		"description": "An online note taking application",
+		"version": "1.0.0"
+	},
+	"servers": [
+		{
+			"url": "http://localhost:6574/api/v1"
+		},
+		{
+			"url": "http://localhost:6574/api/v1/dummy"
+		}
+	],
+	"paths": {
+		"/health": {
+			"get": {
+				"tags": ["Health check"],
+				"summary": "checks API health",
+				"description": "checks the health of the API",
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "boolean",
+									"example": true
+								},
+								"message": {
+									"type": "string",
+									"example": "Api health ok!"
+								}
+							}
+						}
+					}
+				}
+			},
+			"500": {
+				"description": "Internal Server Error",
+				"content": {
+					"application/json": {
+						"schema": {
+							"type": "boolean",
+							"example": false
+						},
+						"message": {
+							"type": "string",
+							"example": "Internal Server error!"
+						}
+					}
+				}
+			},
+			"503": {
+				"description": "Service Unavailable!",
+				"content": {
+					"application/json": {
+						"schema": {
+							"type": "boolean",
+							"example": false
+						},
+						"message": {
+							"type": "string",
+							"example": "Health Api is down!"
+						}
+					}
+				}
+			}
+		}
+	}
+}
