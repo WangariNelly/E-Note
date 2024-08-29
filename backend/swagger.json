@@ -126,7 +126,13 @@
 										"description": "Confirmation of the user's password. Must match the password field."
 									}
 								},
-								"required": ["email", "firstName", "lastName", "password", "confirmPassword"]
+								"required": [
+									"email",
+									"firstName",
+									"lastName",
+									"password",
+									"confirmPassword"
+								]
 							}
 						}
 					}
@@ -213,7 +219,7 @@
 										},
 										"message": {
 											"type": "string",
-											"example":  "Application failed to process the request"
+											"example": "Application failed to process the request"
 										}
 									}
 								}
