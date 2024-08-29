@@ -2,7 +2,7 @@
 	"openapi": "3.0.3",
 	"info": {
 		"title": "E-Note API",
-		"description": "An online note taking application",
+		"description": "An online note-taking application",
 		"version": "1.0.0"
 	},
 	"servers": [
@@ -17,73 +17,204 @@
 		"/health": {
 			"get": {
 				"tags": ["Health check"],
-				"summary": "checks API health",
-				"description": "checks the health of the API",
+				"summary": "Checks API health",
+				"description": "Checks the health of the API",
 				"responses": {
 					"200": {
 						"description": "Success",
 						"content": {
 							"application/json": {
 								"schema": {
-									"type": "boolean",
-									"example": true
-								},
-								"message": {
-									"type": "string",
-									"example": "Api health ok!"
+									"type": "object",
+									"properties": {
+										"success": {
+											"type": "boolean",
+											"example": true
+										},
+										"message": {
+											"type": "string",
+											"example": "API health ok!"
+										}
+									}
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"success": {
+											"type": "boolean",
+											"example": false
+										},
+										"message": {
+											"type": "string",
+											"example": "Internal Server error!"
+										}
+									}
+								}
+							}
+						}
+					},
+					"503": {
+						"description": "Service Unavailable!",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"success": {
+											"type": "boolean",
+											"example": false
+										},
+										"message": {
+											"type": "string",
+											"example": "Health API is down!"
+										}
+									}
 								}
 							}
 						}
 					}
 				}
-			},
-			"500": {
-				"description": "Internal Server Error",
-				"content": {
-					"application/json": {
-						"schema": {
-							"type": "boolean",
-							"example": false
-						},
-						"message": {
-							"type": "string",
-							"example": "Internal Server error!"
-						}
-					}
-				}
-			},
-			"503": {
-				"description": "Service Unavailable!",
-				"content": {
-					"application/json": {
-						"schema": {
-							"type": "boolean",
-							"example": false
-						},
-						"message": {
-							"type": "string",
-							"example": "Health Api is down!"
-						}
-					}
-				}
-			},
-			"auth/": {
-				"post": {
-					"tags": ["User Authentication"],
-					"summary": "User registration",
-					"description": "registers user and validates input data from the user",
-					"responses": {
-						"200": {
-							"description": "Success",
-							"content": {
-								"application/json": {
-									"schema": {
-										"type": "boolean",
-										"example": true
+			}
+		},
+		"/auth/register": {
+			"post": {
+				"tags": ["Create new user"],
+				"summary": "User registration",
+				"description": "Registers user and validates input data from the user",
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"email": {
+										"type": "string",
+										"example": "example@example.com",
+										"description": "User's email address",
+										"minLength": 1,
+										"format": "email"
 									},
-									"message": {
-										"type":"string",
-										"example": "Registration successful!"
+									"firstName": {
+										"type": "string",
+										"example": "John",
+										"description": "User's first name",
+										"minLength": 3
+									},
+									"lastName": {
+										"type": "string",
+										"example": "Doe",
+										"description": "User's last name",
+										"minLength": 3
+									},
+									"password": {
+										"type": "string",
+										"example": "P@ssw0rd!",
+										"description": "User's password",
+										"minLength": 6
+									},
+									"confirmPassword": {
+										"type": "string",
+										"example": "P@ssw0rd!",
+										"description": "Confirmation of the user's password. Must match the password field."
+									}
+								},
+								"required": ["email", "firstName", "lastName", "password", "confirmPassword"]
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "Created!",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"success": {
+											"type": "boolean",
+											"example": true
+										},
+										"message": {
+											"type": "string",
+											"example": "Registration successful!"
+										}
+									}
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"success": {
+											"type": "boolean",
+											"example": false
+										},
+										"message": {
+											"type": "string",
+											"example": "Internal Server error!"
+										}
+									}
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Invalid request data",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"success": {
+											"type": "boolean",
+											"example": false
+										},
+										"errors": {
+											"type": "array",
+											"items": {
+												"type": "string"
+											},
+											"example": [
+												"Request body is empty,Try again!",
+												"Email is required!",
+												"FirstName must have a minimum of 3 characters!",
+												"Password must contain at least 1 digit, 1 special character, and 1 lowercase letter and 1 uppercase letter"
+											]
+										}
+									}
+								}
+							}
+						}
+					},
+					"503": {
+						"description": "Service Unavailable!",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"success": {
+											"type": "boolean",
+											"example": false
+										},
+										"message": {
+											"type": "string",
+											"example":  "Application failed to process the request"
+										}
 									}
 								}
 							}

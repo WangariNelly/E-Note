@@ -5,7 +5,7 @@
   "main": "server.ts",
   "scripts": {
     "dev": "nodemon --legacy-watch server.ts",
-    "serve": "start http://localhost:6574/api/v1/swagger/#/",
+    "serve": " start http://localhost:6574/api/v1/swagger/#/",
     "format": "prettier --write \"**/*.ts\"",
     "format-check": "prettier --check \"**/*.ts\"",
     "test": "jest"
