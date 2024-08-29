@@ -66,6 +66,30 @@
 						}
 					}
 				}
+			},
+			"auth/": {
+				"post": {
+					"tags": ["User Authentication"],
+					"summary": "User registration",
+					"description": "registers user and validates input data from the user",
+					"responses": {
+						"200": {
+							"description": "Success",
+							"content": {
+								"application/json": {
+									"schema": {
+										"type": "boolean",
+										"example": true
+									},
+									"message": {
+										"type":"string",
+										"example": "Registration successful!"
+									}
+								}
+							}
+						}
+					}
+				}
 			}
 		}
 	}
