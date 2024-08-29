@@ -9,7 +9,6 @@ const registerUser = CatchAsyncErrorsHelper(
 		const { firstName, lastName, email, password, confirmPassword } = <
 			IRegisterRequest
 		>req.body;
-		I;
 
 		return responseHelper(res, 200, true, 'Registration successful');
 	},
